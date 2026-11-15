@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guia Vida Natural</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#22a447">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Vida Natural">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&display=swap" rel="stylesheet">
 <style>
 /* ── RESET ─────────────────────────────────── */
@@ -507,7 +515,7 @@ img{max-width:100%;display:block}
 <style>
 /* ── LOGIN / ADMIN (Supabase) ── */
 body.gvn-locked{overflow:hidden}
-body.gvn-locked>*:not(#gvn-gate):not(#gvn-intro):not(script){display:none!important}
+body.gvn-locked>*:not(#gvn-gate):not(#gvn-intro):not(#gvn-ios):not(script){display:none!important}
 #gvn-gate{position:fixed;inset:0;z-index:1000;background:#fff;display:flex;align-items:center;justify-content:center;padding:28px 20px;overflow-y:auto;color:#163d1f}
 #gvn-gate.off{display:none}
 #gvn-gate::before{content:'';position:fixed;top:-120px;right:-120px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,#c9f0cf 0%,rgba(201,240,207,0) 70%);pointer-events:none}
@@ -540,6 +548,22 @@ body.gvn-locked>*:not(#gvn-gate):not(#gvn-intro):not(script){display:none!import
 .g-plano .g-pr small{font-size:.65rem;font-weight:400;opacity:.75}
 .g-plano span{font-size:.68rem;opacity:.85;line-height:1.35;display:block}
 .g-badge{display:inline-block;background:#fff;color:#178a37;font-size:.52rem;font-weight:700;letter-spacing:1px;padding:2px 6px;border-radius:6px;margin-bottom:5px}
+.g-inst{display:flex;align-items:center;gap:12px;width:100%;margin-top:18px;background:#f0faf2;border:1.5px dashed #22a447;border-radius:14px;padding:12px 14px;font-family:'DM Sans',sans-serif;color:#163d1f;cursor:pointer;text-align:left}
+.g-inst img{width:40px;height:40px;border-radius:10px;flex-shrink:0}
+.g-inst b{display:block;font-size:.88rem}.g-inst span{font-size:.72rem;color:#4d6b53}
+#gvn-ios{position:fixed;inset:0;z-index:1200;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center}
+#gvn-ios.on{display:flex}
+.ios-box{background:#fff;width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:24px 20px 28px;color:#163d1f;font-family:'DM Sans',sans-serif;animation:gUp .35s ease both}
+.ios-box h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:1.4rem;margin-bottom:14px}
+.ios-step{display:flex;gap:12px;align-items:flex-start;font-size:.86rem;line-height:1.5;padding:9px 0;border-bottom:1px solid #e3f1e6}
+.ios-step i{font-style:normal;width:26px;height:26px;border-radius:50%;background:#22a447;color:#fff;font-size:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#gvn-bolha{position:fixed;right:16px;bottom:22px;z-index:250;display:none;align-items:center;gap:8px;background:#22a447;color:#fff;border:none;border-radius:30px;padding:8px 16px 8px 8px;font-family:'DM Sans',sans-serif;font-size:.82rem;font-weight:600;box-shadow:0 8px 24px rgba(22,128,58,.4);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;animation:bIn .5s cubic-bezier(.2,1.4,.4,1) both}
+#gvn-bolha.on{display:flex}
+#gvn-bolha.arrastando{cursor:grabbing;transform:scale(1.06);box-shadow:0 14px 30px rgba(22,128,58,.5);animation:none}
+#gvn-bolha img{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.8);pointer-events:none}
+#gvn-bolha::after{content:'';position:absolute;inset:-4px;border-radius:34px;border:2px solid #22a447;opacity:0;animation:bPulse 2.4s ease-out infinite;pointer-events:none}
+@keyframes bIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:none}}
+@keyframes bPulse{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(1.25)}}
 .g-ou{text-align:center;font-size:.7rem;color:#8aa58f;margin:16px 0 12px;letter-spacing:2px}
 /* ── INTRO ── */
 #gvn-intro{position:fixed;inset:0;z-index:1100;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;transition:opacity .7s ease,visibility .7s}
@@ -617,6 +641,7 @@ body.gvn-locked>*:not(#gvn-gate):not(#gvn-intro):not(script){display:none!import
         <div class="g-ou">— JÁ TEM CONTA? —</div>
         <button class="gate-btn g-sec" onclick="gTela('g-login')">Entrar</button>
       </div>
+      <button class="g-inst" id="g-inst-btn" style="display:none" onclick="gvnInstalar()"><img src="icon-192.png" alt=""><div><b>Instalar o app no celular</b><span>Abra com um toque, direto da tela inicial</span></div></button>
       <div id="g-home-in" style="display:none">
         <div class="gate-p" style="background:#f0faf2;border-radius:12px;padding:12px 14px;font-size:.8rem;margin-bottom:12px">Olá! A sua conta <b id="g-quem"></b> está criada. Falta só escolher o plano acima. Use <b>este mesmo e-mail</b> no pagamento.</div>
         <button class="gate-btn" id="g-verificar">Já paguei — entrar no app</button>
@@ -660,6 +685,17 @@ body.gvn-locked>*:not(#gvn-gate):not(#gvn-intro):not(script){display:none!import
     <div class="gate-foot">O acesso ao app é liberado logo após o pagamento do plano.</div>
   </div>
 </div>
+<button id="gvn-bolha" aria-label="Instalar app"><img src="icon-192.png" alt="">Instalar app</button>
+<div id="gvn-ios" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="ios-box">
+    <h3>Instalar no iPhone</h3>
+    <div class="ios-step"><i>1</i><div>Abra este endereço no <b>Safari</b>.</div></div>
+    <div class="ios-step"><i>2</i><div>Toque no botão <b>Compartilhar</b> (o quadrado com a seta para cima ⬆️), em baixo da tela.</div></div>
+    <div class="ios-step"><i>3</i><div>Desça e toque em <b>Adicionar à Tela de Início</b>.</div></div>
+    <div class="ios-step" style="border:none"><i>4</i><div>Toque em <b>Adicionar</b>. O ícone 🌿 aparece junto aos seus apps.</div></div>
+    <button class="gate-btn" style="margin-top:16px" onclick="document.getElementById('gvn-ios').classList.remove('on')">Entendi</button>
+  </div>
+</div>
 <div id="gvn-perfil" onclick="if(event.target===this)gvnPerfilClose()">
   <div class="pf-box">
     <div class="pf-top"><div class="pf-av" id="pf-av">🌿</div><div><div class="pf-mail" id="pf-mail"></div><span class="pf-tag" id="pf-tag"></span></div></div>
@@ -668,6 +704,7 @@ body.gvn-locked>*:not(#gvn-gate):not(#gvn-intro):not(script){display:none!import
     <div class="pf-row"><span>Membro desde</span><span id="pf-desde"></span></div>
     <div class="pf-sec">A minha conta</div>
     <button class="pf-btn" id="pf-upgrade" onclick="gvnComprar('premium')">✨ Passar para o Premium</button>
+    <button class="pf-btn" id="pf-inst" style="display:none" onclick="gvnInstalar()">📲 Instalar o app no celular</button>
     <button class="pf-btn" onclick="gvnMudarSenha()">🔑 Mudar a minha senha</button>
     <div class="pf-msg" id="pf-msg"></div>
     <button class="pf-btn out" onclick="gvnPerfilClose();gvnSair()">Sair da conta</button>
@@ -1846,6 +1883,8 @@ function gvnComprar(plano){
 (function(){
   const intro=document.getElementById('gvn-intro');
   if(location.hash.includes('type=recovery')){intro.remove();return;}
+  let temSessao=false;try{temSessao=!!localStorage.getItem('sb-alkrpdftlyucsetynpny-auth-token');}catch(e){}
+  if(temSessao){intro.remove();return;}
   const nome=document.getElementById('intro-nome');
   const txt='Guia Vida Natural';let d=1.5;
   txt.split(' ').forEach((pal,i)=>{
@@ -1968,6 +2007,48 @@ function gvnAdminClose(){$g('gvn-admin').classList.remove('on');}
     const {data}=await sb.auth.getSession();gCarregar(data.session);
   };
 })();
+
+// ════ INSTALAR COMO APP (PWA) ════
+let gvnPromptInst=null;
+const gvnJaApp=()=>window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+const gvnIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function gvnMostrarInst(){
+  const ver=!gvnJaApp()&&(gvnPromptInst||gvnIOS());
+  ['g-inst-btn','pf-inst'].forEach(id=>{const el=document.getElementById(id);if(el)el.style.display=ver?'flex':'none';});
+  const pf=document.getElementById('pf-inst');if(pf&&ver)pf.style.display='block';
+  const b=document.getElementById('gvn-bolha');if(b)b.classList.toggle('on',!!ver);
+}
+// ── bolha "Instalar app": toque = instalar; arrastar = mudar de lugar ──
+(function(){
+  const b=document.getElementById('gvn-bolha');if(!b)return;
+  const KEY='gvn_bolha_pos';
+  const limitar=(x,y)=>{const r=b.getBoundingClientRect();return[Math.min(Math.max(8,x),innerWidth-r.width-8),Math.min(Math.max(8,y),innerHeight-r.height-8)];};
+  const por=(x,y)=>{[x,y]=limitar(x,y);b.style.left=x+'px';b.style.top=y+'px';b.style.right='auto';b.style.bottom='auto';};
+  try{const g=JSON.parse(localStorage.getItem(KEY)||'null');if(g)requestAnimationFrame(()=>por(g.x*innerWidth,g.y*innerHeight));}catch(e){}
+  let ini=null,moveu=false;
+  b.addEventListener('pointerdown',e=>{const r=b.getBoundingClientRect();ini={px:e.clientX,py:e.clientY,dx:e.clientX-r.left,dy:e.clientY-r.top};moveu=false;b.setPointerCapture(e.pointerId);});
+  b.addEventListener('pointermove',e=>{
+    if(!ini)return;
+    if(!moveu&&Math.hypot(e.clientX-ini.px,e.clientY-ini.py)<8)return;
+    moveu=true;b.classList.add('arrastando');por(e.clientX-ini.dx,e.clientY-ini.dy);
+  });
+  const fim=()=>{
+    if(!ini)return;ini=null;b.classList.remove('arrastando');
+    if(moveu){const r=b.getBoundingClientRect();try{localStorage.setItem(KEY,JSON.stringify({x:r.left/innerWidth,y:r.top/innerHeight}));}catch(e){}}
+    else gvnInstalar();
+  };
+  b.addEventListener('pointerup',fim);b.addEventListener('pointercancel',()=>{ini=null;b.classList.remove('arrastando');});
+  addEventListener('resize',()=>{if(b.style.left){const r=b.getBoundingClientRect();por(r.left,r.top);}});
+})();
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();gvnPromptInst=e;gvnMostrarInst();});
+window.addEventListener('appinstalled',()=>{gvnPromptInst=null;gvnMostrarInst();});
+async function gvnInstalar(){
+  if(gvnPromptInst){gvnPromptInst.prompt();await gvnPromptInst.userChoice;gvnPromptInst=null;gvnMostrarInst();return;}
+  if(gvnIOS()){document.getElementById('gvn-ios').classList.add('on');return;}
+  alert('Para instalar: abra o menu do navegador (⋮) e toque em "Instalar app" ou "Adicionar à tela inicial".');
+}
+gvnMostrarInst();
+if('serviceWorker' in navigator&&location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
 </script>
 </body>
 </html>
